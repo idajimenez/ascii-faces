@@ -6,16 +6,16 @@ export default {
   productContainer: {
     display: 'flex',
     flexWrap: 'wrap',
-    margin: '0px auto'    
+    justifyContent: 'center'   
   },
   productItem: {
     margin: '10px'
   },
   faceContainer: {
-    width: '175px',
-    height: '175px',
+    minWidth: '250px',
+    height: '250px',
     borderRadius: '3%',
-    backgroundColor: '#EDEDED',
+    // backgroundColor: '#EDEDED',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

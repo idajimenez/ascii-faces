@@ -8,7 +8,7 @@ class ProductItem extends React.Component {
     const { product } = this.props;
     return (
       <div style={styles.productItem}>
-        <Face product={product} />
+        <Face product={product} {...this.props} />
         <div style={styles.sizePriceContainer}>
           <p>Size: {product.size}</p>
           <p style={styles.price}>{toCents(product.price)}</p>

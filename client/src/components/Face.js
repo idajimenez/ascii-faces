@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './styles';
 
-const productContainer = ({product}) => (
-  <div style={styles.faceContainer}>
+const productContainer = ({product, color}) => (
+  <div style={{...styles.faceContainer, backgroundColor: color}}>
     <p style={{fontSize: `${product.size}px`}}>{product.face}</p> 
   </div>
 )
