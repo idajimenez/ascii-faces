@@ -21,6 +21,16 @@ export default function(state = initialState, action) {
         ...state,
         products: products
       }
+    case 'SORT_PRODUCTS':
+      return {
+        ...state,
+        isFetching: true
+      }
+    case 'SET_SORT_PRODUCTS':
+      return {
+        ...state,
+        products: action.payload
+      }
     default:
       return state;
   }

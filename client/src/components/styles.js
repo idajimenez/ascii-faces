@@ -9,7 +9,7 @@ export default {
     justifyContent: 'center'   
   },
   productItem: {
-    margin: '10px'
+    margin: '30px 10px'
   },
   faceContainer: {
     minWidth: '250px',
@@ -23,7 +23,8 @@ export default {
   sizePriceContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    height: '30px'
+    height: '30px',
+    marginTop: '15px'
   },
   price: {
     fontWeight: 'bold'
@@ -32,5 +33,11 @@ export default {
     color: 'gray',
     fontSize: '15px',
     lineHeight: '0.2'
+  },
+  sort: {
+    textAlign: 'right',
+    margin: '10px auto',
+    width: '89%',
+    // margin: '20px 0px'    
   }
 }

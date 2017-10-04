@@ -3,6 +3,7 @@ import './App.css';
 import { connect } from 'react-redux';
 import { fetchProductsByPage } from './redux/product/actions';
 import ProductContainer from './components/ProductContainer';
+import Sort from './components/Sort';
 import styles from './components/styles';
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
 
     return (
       <div style={styles.appContainer}>
+        <Sort />
         {(products.length > 0) && (
           <ProductContainer 
             fetchProducts={this.fetchProducts}
