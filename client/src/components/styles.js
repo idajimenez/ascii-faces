@@ -36,8 +36,23 @@ export default {
   },
   sort: {
     textAlign: 'right',
-    margin: '10px auto',
-    width: '89%',
-    // margin: '20px 0px'    
+    margin: '0px auto',
+    padding: '5px 15px'
+  },
+  header: {
+    margin: '30px 20px',
+    textAlign: 'center'
+  },
+  ads: {
+    alignSelf: 'center'
+  },
+  loader: {
+    display: 'block',
+    textAlign: 'center',
+    padding: '50px'
+  }, 
+  innerAdsContainer: {
+    width: '100%',
+    textAlign: 'center'
   }
 }

@@ -1,19 +1,19 @@
 import axios from 'axios'
+import { getSortOption, insertAd } from '../../utils/helpers';
 
-export function fetchById(pageNumber, sortBy) {
-  console.log(pageNumber)
-  const url = `/api/products?_page=${pageNumber}&_limit=15`
+export function fetchById(pageNumber) {
+  const url = `/api/products?_page=${pageNumber}&_limit=20`
   return axios.get(url).then(res => {
-    console.log(res.data)
+    if (res.data.length !== 0) insertAd(res);
     return res.data
   })
 }
 
-export function sortProducts(sortBy) {
-
-  const url = `/api/products?_sort=${sortBy}`
+export function sortProducts(sortBy, pageNumber) {
+  let sort = (sortBy === 'id') ? '_sort=id&' : getSortOption(sortBy)
+  const url = `/api/products?${sort}_page=${pageNumber}&_limit=20`
   return axios.get(url).then(res => {
-    console.log('sort', res.data)
+    if (res.data.length !== 0) insertAd(res);
     return res.data
   })
 }

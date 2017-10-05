@@ -6,6 +6,7 @@ import 'semantic-ui-css/semantic.min.css';
 import styles from './styles';
 
 const sortBy = [
+  { key: 'default', text: 'Default Sorting', value: 'default' },
   { key: 'sizeAsc', text: 'Size: Small to Large', value: 'sizeAsc' },
   { key: 'sizeDesc', text: 'Size: Large to Small', value: 'sizeDesc' },
   { key: 'priceAsc', text: 'Price: Low to High', value: 'priceAsc' },

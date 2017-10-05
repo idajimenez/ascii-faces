@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './styles';
 
-const productContainer = ({product, color}) => (
+const face = ({product, color}) => (
   <div style={{...styles.faceContainer, backgroundColor: color}}>
-    <p style={{fontSize: `${product.size}px`}}>{product.face}</p> 
+    <p style={{fontSize: `${product.size}px`, padding: '10px'}}>{product.face}</p> 
   </div>
 )
 
-export default productContainer;
+export default face;

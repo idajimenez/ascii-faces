@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchProductsByPage } from '../redux/product/actions';
-// import InfiniteScroll from 'react-infinite-scroller';
+import { fetchProductsByPage, sortProductsBy } from '../redux/product/actions';
+import Ads from './Ads';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductItem from './ProductItem';
+import Spinner from 'react-spinkit';
 import styles from './styles';
 const colors = ['#9bc95b', '#ffd47b', '#95a9d6', '#ffa8e1'];
 
@@ -15,9 +16,12 @@ class ProductContainer extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.fetchProducts();
+  }
+
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.products.length !== this.state.products.length) {
-      console.log('CHANGED')
+    if (JSON.stringify(this.props.products) !== JSON.stringify(this.state.products)) {
       this.setState({ products: this.props.products });
     }
   }
@@ -25,28 +29,30 @@ class ProductContainer extends React.Component {
   render() {
     return (
       <InfiniteScroll
-        pullDownToRefresh
-        pullDownToRefreshContent={
-          <h3 style={{textAlign: 'center'}}>&#8595; Pull down to refresh</h3>
-        }
-        releaseToRefreshContent={
-          <h3 style={{textAlign: 'center'}}>&#8593; Release to refresh</h3>
-        }
-        refreshFunction={() => console.log('refresh')}
         next={this.fetchProducts.bind(this)}
-        hasMore={true}
-        loader={<div style={{display: 'block'}}><h4>Loading...</h4></div>}
+        hasMore={!this.props.isLoadedAllProducts}
+        loader={
+          <div style={styles.loader}>
+            <Spinner name="ball-beat" />
+          </div>
+        }
         endMessage={
-          <p style={{textAlign: 'center'}}>
+          <p style={styles.loader}>
             <b>~ end of catalogue ~</b>
           </p>
         }
-        
+        scrollThreshold={0.7}
       >
         <div style={styles.productContainer}>
-          {this.state.products.map((product, i) => 
-            <ProductItem key={product.id} product={product} color={colors[i % 4]}/>
-          )}
+          {this.props.isSortChanged ?
+            null :
+            this.state.products.map((product, i) => {
+              return product.hasOwnProperty('source') ?
+                <div key={`${product.id}i`} style={styles.innerAdsContainer}>
+                  <Ads source={product.source} />
+                </div>
+                : <ProductItem key={`${product.id}i`} product={product} color={colors[i % 4]}/>
+          })}
         </div>
       </InfiniteScroll>
     );
@@ -54,20 +60,29 @@ class ProductContainer extends React.Component {
 
   fetchProducts() {
     let pageNumber = this.props.pageNumber + 1;
-    this.props.fetchProductsByPage(pageNumber);    
+
+    if (this.props.sortBy) {
+      this.props.sortProductsBy(this.props.sortBy, pageNumber);
+    } else {
+      this.props.fetchProductsByPage(pageNumber);    
+    }
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-		fetchProductsByPage: (pageNumber) => dispatch(fetchProductsByPage(pageNumber))
+    fetchProductsByPage: (pageNumber) => dispatch(fetchProductsByPage(pageNumber)),
+    sortProductsBy: (sortBy, pageNumber) => dispatch(sortProductsBy(sortBy, pageNumber))    
 	}
 }
 
 const mapStateToProps = state => {
 	return { 
+    isLoadedAllProducts: state.product.isLoadedAllProducts,
+    isSortChanged: state.product.isSortChanged,
     pageNumber: state.product.pageNumber,
-    products: state.product.products
+    products: state.product.products,
+    sortBy: state.product.sortBy    
 	}
 }
 
