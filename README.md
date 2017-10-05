@@ -10,7 +10,6 @@ yarn install
 cd ../
 npm start
 ```
-====
 
 Products Grid
 ====
