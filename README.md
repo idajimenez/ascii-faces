@@ -1,3 +1,17 @@
+To run this in your local machine, type in the terminal:
+```
+git clone https://github.com/idajimenez/ascii-faces.git
+cd ascii-faces
+npm install
+
+cd client
+yarn install
+
+cd ../
+npm start
+```
+====
+
 Products Grid
 ====
 
